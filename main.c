@@ -2,6 +2,7 @@
 
 void printmat(char arr[][3]);
 void display(char * s);
+int cheak(char arr[][3]);
 
 int main()
 {
@@ -17,6 +18,8 @@ int main()
 		{' ',' ','X'}
 	};
 	
+
+	display("./logo.map");
 	
 	
 	
@@ -38,5 +41,35 @@ void display(char * s){
 	while(fgets(buff,100,fptr)){
 		printf("%s",buff);
 	}
+}
+
+int check(char arr[][3]){
+	//check horizontal
+	for(int i=0;i<3;i++){
+		char a = arr[i][0];
+		if(a == arr[i][1] && a == arr[i][2]){
+			if(a=='X') return 1;
+			else if(a=='0') return 0;
+		}
+	}
+
+	//check vertical
+	for(int j=0;j<3;j++){
+		char a = arr[0][j];
+		if(a == arr[1][j] && a == arr[2][j]){
+			if(a=='X') return 1;
+			else if(a=='0') return 0;
+		}
+	}
+
+	//check diagonal
+	int b = arr[1][1];
+	if((b==arr[0][0] && b== arr[2][2]) || (b==arr[0][2] && b==arr[2][0])){
+		if(b=='X') return 1;
+		else if(b=='0') return 0;
+	}
+
+
+	return -1;
 }
 
