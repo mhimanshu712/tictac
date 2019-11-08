@@ -1,25 +1,63 @@
-#include <stdio.h>
+#include <cstdio>
+#include <cstdlib>
+#include <ctime>
+#include <map>
+
+using namespace std;
 
 void printmat(char arr[][3]);
 void display(char * s);
-int cheak(char arr[][3]);
+int check(char arr[][3]);
+
+struct cord {
+	int x;
+	int y;
+};
 
 int main()
 {
+	//Making the comfort map
+	map <int,cord> m;
+	
+	int z=1;
+	for(int i=0;i<3;i++){
+		for(int j=0;j<3;j++){
+			m[z] = {i,j};
+			z++;	
+		}
+	}
+	
+
+	
 	char a[3][3] = {
 		{'1','2','3'},
 		{'4','5','6'},
 		{'7','8','9'}
 	};
 	
-	char b[3][3] = {
+	char e[3][3] = {
 		{' ','X',' '},
 		{'0',' ',' '},
 		{' ',' ','X'}
 	};
 	
 
-	display("./logo.map");
+	//display("./logo.map");
+	//display("./intro.map");
+	
+	printmat(e);
+	int count = 0, pos;
+	
+	while(count < 9){
+		printf("Position: ");
+		scanf("%d",&pos);
+		if(e[m[pos].x][m[pos].y] == ' '){
+			e[m[pos].x][m[pos].y] = 'X';
+		}else{
+			printf("\n Position occupied");
+		}
+	}
+	
 	
 	
 	
@@ -28,10 +66,13 @@ int main()
 void printmat(char arr[][3]){
 	for(int i=0;i<3;i++){
 		int j=0;
-		printf("\t\t %c | %c | %c \n",arr[i][j++],arr[i][j++],arr[i][j]);
+		printf("\t\t %c ",arr[i][j++]);
+		printf("| %c |",arr[i][j++]);
+		printf(" %c \n",arr[i][j]);
 		if(i<2) printf("\t\t-----------");
 		printf("\n");
 	}
+	printf("\n");
 }
 
 void display(char * s){
@@ -41,6 +82,7 @@ void display(char * s){
 	while(fgets(buff,100,fptr)){
 		printf("%s",buff);
 	}
+	printf("\n");
 }
 
 int check(char arr[][3]){
